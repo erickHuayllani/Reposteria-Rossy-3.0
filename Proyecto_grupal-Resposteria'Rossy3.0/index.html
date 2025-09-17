@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panadería y pasteleria D'rossy</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="css/estilos.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/image.png" alt="Logo" width="40" height="40" class="d-inline-block align-text-top rounded-circle">
+        Panaderia y Pasteleria D'rossy
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+          <li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
+          <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1>Disfruta de una torta hecha a tu estilo</h1>
+      <p class="lead">Hecha con cariño, para cada momento</p>
+      <a href="catalogo.html" class="btn btn-light btn-lg">Ver Catálogo</a>
+    </div>
+  </header>
+
+  <!-- Promociones -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Ofertas del Día</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-5">
+            <img src="img/Captura de pantalla 2025-09-17 032111.png" class="card-img-top" alt="Torta Herlada">
+            <div class="card-body">
+              <h5 class="card-title">Torta Herlada</h5>
+              <p class="card-text">$/45.00</p>
+              <a href="catalogo.html" class="btn btn-outline-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-1">
+            <img src="img/pizzascaseras.jpg" class="card-img-top" alt="Pizza Caseras">
+            <div class="card-body">
+              <h5 class="card-title">Pizza Caseras</h5>
+              <p class="card-text">$/30.00</p>
+              <a href="catalogo.html" class="btn btn-outline-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="img/keke.png" class="card-img-top" alt="Keke">
+            <div class="card-body">
+              <h5 class="card-title">Keke</h5>
+              <p class="card-text">$/10.00</p>
+              <a href="catalogo.html" class="btn btn-outline-primary">Comprar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="promo" data-aos="zoom-in">
+    <h2>20% de descuento en tu primer pedido</h2>
+    <p>¡Aprovecha nuestra promoción especial!</p>
+  </section>
+
+  <section class="explore" data-aos="fade-up">
+    <h2>Explora Más</h2>
+    <div class="tabs">
+      <button class="active" data-category="Panes">Panes</button>
+      <button data-category="Tortas">Tortas</button>
+      <button data-category="Postres">Postres</button>
+    </div>
+    <div id="gallery" class="gallery"></div>
+  </section>
+   <!-- JS -->
+   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+   <script>
+     AOS.init({
+       duration: 1000,
+       once: true
+     });
+ 
+     const images = {
+       "Panes": [
+         "img/Tantawawaas.jpg",
+         "img/panfrances.jpg",
+         "img/PanBollo.png"
+       ],
+       "Tortas": [
+         "img/Pokemom.png",
+         "img/bob esponja.png" ,
+         "img/totoro.png"
+       ],
+       "Postres": [
+         "img/keke.png",
+         "img/cachito.png" ,
+         "img/galletaAjonjoli.png"
+       ],
+     };
+ 
+     const buttons = document.querySelectorAll(".tabs button");
+     const gallery = document.getElementById("gallery");
+ 
+     function loadGallery(category) {
+       gallery.innerHTML = "";
+       images[category].forEach((src, index) => {
+         const card = document.createElement("div");
+         card.classList.add("card");
+         card.setAttribute("data-aos", "fade-up");
+         card.setAttribute("data-aos-delay", `${index * 100}`);
+         const img = document.createElement("img");
+         img.src = src;
+         img.alt = category;
+         card.appendChild(img);
+         gallery.appendChild(card);
+       });
+       AOS.refresh();
+     }
+ 
+     buttons.forEach(btn => {
+       btn.addEventListener("click", () => {
+         buttons.forEach(b => b.classList.remove("active"));
+         btn.classList.add("active");
+         loadGallery(btn.dataset.category);
+       });
+     });
+ 
+     loadGallery("Panes");
+   </script>
+ 
+ <button id="modoOscuroBtn" class="btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+   🌙 Modo Nocturno
+ </button>
+ 
+ <script>
+   const btn = document.getElementById('modoOscuroBtn');
+   const body = document.body;
+ 
+   btn.addEventListener('click', () => {
+     body.classList.toggle('modo-oscuro');
+ 
+     // Cambia el texto del botón
+     if (body.classList.contains('modo-oscuro')) {
+       btn.textContent = '☀️ Modo Claro';
+     } else {
+       btn.textContent = '🌙 Modo Nocturno';
+     }
+   });
+ </script>
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p>&copy; 2025 Panadería y pasteleria D'rossy. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+  <script>
+    function agregarAlCarrito(nombre, precio) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.push({ nombre, precio });
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      alert(nombre + " ha sido agregado al carrito.");
+    }
+  </script>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Script personalizado -->
+  <script src="js/script.js"></script>
+</body>
+</html>
